@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Image = SixLabors.ImageSharp.Image;
 
 namespace FashionApp.Views
 {
@@ -35,9 +42,71 @@ namespace FashionApp.Views
         private List<Product> GetCollections()
         {
             var trendList = new List<Product>();
-            trendList.Add(new Product { Image = "floral.png", Name = "Floral Bag + Hat", Price = "$123.50" });
-            trendList.Add(new Product { Image = "satchel.png", Name = "Satchel Bag", Price = "$49.99" });
-            trendList.Add(new Product { Image = "leatherBag.png", Name = "Leather Bag", Price = "$40.99" });
+            var floral = ImageSource.FromResource("floral.png");
+            var satchel = ImageSource.FromResource("satchel.png");
+            var leatherBag = ImageSource.FromResource("leatherBag.png");
+
+            Func<Stream> GetStreamFunc(string hash)
+            {
+                Stream GetImage()
+                {
+                    var decoder = new Blurhash.ImageSharp.Decoder();
+                    var image = decoder.Decode(hash, 150, 150);
+                    var ms = new MemoryStream();
+                    image.SaveAsPng(ms);
+                    ms.Seek(0, SeekOrigin.Begin);
+                    return ms;
+                }
+
+                return GetImage;
+            }
+
+            var p1 = new Product { Image = ImageSource.FromStream(GetStreamFunc("KcM%TJxatR?^W=ae%hM{aL")), Name = "Floral Bag + Hat", Price = "$123.50" };
+            Task.Run(async () =>
+            {
+                var rng = new Random();
+                await Task.Delay(rng.Next(1000, 4000));
+                p1.Image = floral;
+            });
+
+            var p2 = new Product { Image = ImageSource.FromStream(GetStreamFunc("KsMsTXt7T0-oWBW;.mayr=")), Name = "Satchel Bag", Price = "$49.99" };
+            Task.Run(async () =>
+            {
+                var rng = new Random();
+                await Task.Delay(rng.Next(1000, 4000));
+                p2.Image = satchel;
+            });
+
+            var p3 = new Product { Image = ImageSource.FromStream(GetStreamFunc("KyLD_g_4-;%0R+ofxZW=NG")), Name = "Leather Bag", Price = "$40.99" };
+            Task.Run(async () =>
+            {
+                var rng = new Random();
+                await Task.Delay(rng.Next(1000, 4000));
+                p3.Image = leatherBag;
+            });
+
+            trendList.Add(p1);
+            trendList.Add(p2);
+            trendList.Add(p3);
+            trendList.Add(p1);
+            trendList.Add(p2);
+            trendList.Add(p3);
+            trendList.Add(p1);
+            trendList.Add(p2);
+            trendList.Add(p3);
+            trendList.Add(p1);
+            trendList.Add(p2);
+            trendList.Add(p3);
+            trendList.Add(p1);
+            trendList.Add(p2);
+            trendList.Add(p3);
+            trendList.Add(p1);
+            trendList.Add(p2);
+            trendList.Add(p3);
+            trendList.Add(p1);
+            trendList.Add(p2);
+            trendList.Add(p3);
+
             return trendList;
         }
 
@@ -86,10 +155,27 @@ namespace FashionApp.Views
         public string Image { get; set; }
     }
 
-    public class Product
+    public class Product : INotifyPropertyChanged
     {
         public string Name { get; set; }
         public string Price { get; set; }
-        public string Image { get; set; }
+
+        public ImageSource PlaceHolderImage { get; set; }
+
+        private ImageSource image;
+        public ImageSource Image {
+            get => image;
+            set {
+                image = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
     }
 }

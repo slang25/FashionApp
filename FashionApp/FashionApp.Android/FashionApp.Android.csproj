@@ -15,7 +15,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidUseAapt2>true</AndroidUseAapt2>
@@ -109,7 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FashionApp\FashionApp.csproj">
-      <Project>{5318C79F-FB5B-410F-B8E8-F03FBD1760E4}</Project>
+      <Project>{108E7B6B-B928-4C52-8412-96C8E384BEED}</Project>
       <Name>FashionApp</Name>
     </ProjectReference>
   </ItemGroup>
@@ -139,9 +138,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\fav.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\floral.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\heart.png" />

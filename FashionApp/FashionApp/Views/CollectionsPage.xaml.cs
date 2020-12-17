@@ -26,6 +26,7 @@ namespace FashionApp.Views
             colList.Add(new Category { Image = "watches.png", Title = "MEN'S WRISTWATCHES" });
             colList.Add(new Category { Image = "minidress.png", Title = "WOMEN'S MINI DRESSES" });
             colList.Add(new Category { Image = "coats.png", Title = "WOMEN'S COATS" });
+
             return colList;
         }
     }

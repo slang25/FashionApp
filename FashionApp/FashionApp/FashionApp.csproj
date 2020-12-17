@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -13,8 +13,20 @@
     <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.673156" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0007" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="floral.png">
+      <LogicalName>floral.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="satchel.png">
+      <LogicalName>satchel.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="leatherBag.png">
+      <LogicalName>leatherBag.png</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="AppShell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -31,5 +43,13 @@
     <EmbeddedResource Update="Views\ShopPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Blurhash.Core">
+      <HintPath>..\..\..\blurhash.net\Blurhash.Core\bin\Debug\netstandard1.6\Blurhash.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Blurhash.ImageSharp">
+      <HintPath>..\..\..\blurhash.net\Blurhash.ImageSharp\bin\Debug\netstandard2.1\Blurhash.ImageSharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
